@@ -1,7 +1,7 @@
 """
 Problem #008: Largest product in a series
 
-The four adjacent digits in the 1000-digit number (/files/008.txt) that have
+The four adjacent digits in the 1000-digit number (_files/008.txt) that have
 the greatest product are 9 × 9 × 8 × 9 = 5832.
 
 Find the thirteen adjacent digits in the 1000-digit number
@@ -30,7 +30,7 @@ def maxProduct(n, number):
   return record
 
 # working with external file where the number is stored
-with open('python/files/008.txt') as number:
+with open('_files/008.txt') as number:
   number = number.read()
   # test
   print(maxProduct(4, number))
