@@ -7,15 +7,18 @@ The sum of these multiples is 23.
 Find the sum of all the multiples of 3 or 5 below 1000.
 '''
 
-def sumMultiples3and5(n):
-  i = 1
-  sum = 0
-  while i < n:
-    if i % 3 == 0 or i % 5 == 0:
-      sum += i
-      i += 1
-    else:
-      i += 1
-  return sum
+def sum_of_multiples(limit, *multiples):
+  total = 0
 
-print(sumMultiples3and5(1000))
+  for number in range(1, limit):
+    for multiple in multiples:  
+
+      if number % multiple == 0:
+        total += number
+        break
+
+  return total
+
+# tests
+print(sum_of_multiples(10, 3, 5))
+print(sum_of_multiples(1000, 3, 5))
