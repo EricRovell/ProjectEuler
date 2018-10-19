@@ -17,9 +17,14 @@ def pythagorean_triplet(m):
     for b in range(1, m):
       for c in range(1, m):
         
-        if a + b + c == m:
+        #triangle inequality
+        if c < a + b and a < b + c and b < a + c:
+          # pythagorean triangle
           if a ** 2 + b ** 2 == c ** 2:
-            return a * b * c
+            # desired perimeter
+            if a + b + c == m:
+            
+              return f'({a}, {b}, {c}) => with product {a * b * c}.'
 
 # test
 print(pythagorean_triplet(1000))
