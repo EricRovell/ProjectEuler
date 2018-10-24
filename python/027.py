@@ -37,8 +37,13 @@ def quadratic_primes(a_limit, b_limit, primes_list):
   def equation(n, a, b):
     return n ** 2 + a * n + b
   
+  # 'b' can't be even, equation(0) = b, so 'b' should be a prime
+  # incrementing 'b_limit' to assure the step = 2
+  
   for a in range(-a_limit + 1, a_limit):
-    for b in range(-b_limit + 1, b_limit):
+    for b in range(-b_limit, b_limit + 1):
+
+      if b % 2 == 0: continue
 
       n = 0
       while True:
