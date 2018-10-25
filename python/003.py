@@ -19,14 +19,10 @@ def primesList(n, m = 2):
 
   for possiblePrime in range(n, m + 1):
 
-    isPrime = True
-
     for number in range(2, int(possiblePrime ** 0.5 + 1)):
       if possiblePrime % number == 0:
-        isPrime = False
         break
-
-    if isPrime:
+    else:
       primes.append(possiblePrime)
 
   return primes

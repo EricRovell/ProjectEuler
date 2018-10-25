@@ -18,14 +18,10 @@ def primeNumber(n):
 
   while len(primes) != n:
     
-    isPrime = True
-
     for number in range(2, int(possiblePrime ** 0.5 + 1)):
       if possiblePrime % number == 0:
-        isPrime = False
         break
-
-    if isPrime:
+    else:
       primes.append(possiblePrime)
     
     possiblePrime += 1
