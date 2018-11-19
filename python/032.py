@@ -23,7 +23,10 @@ def is_pandigital(number, left, right):
     else: return False
   return True if len(digits) == 0 else False
 
-
+# limititng the search space:
+# you can get 9-digit number only by:
+# (1-digit * 4-digit) OR (2-digit * 3-digit) => both need 4-digit product
+# so: multiplicand * multiplier < 10 000
 def pandigital_products():
   result = set()
   
