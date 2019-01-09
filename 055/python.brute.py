@@ -1,8 +1,6 @@
 # returns True / False if the given number is Lychrel number
 def lychrel(number):
-  iteration = 0
-  while iteration < 50:
-    iteration += 1
+  for _ in range(50):
     number += int( str(number)[::-1] )
     if str(number) == str(number)[::-1]:
       return False
@@ -19,4 +17,3 @@ def lychrel_numbers(limit):
 
 # tests
 print(lychrel_numbers(10000))
-# print(lychrel(196))
