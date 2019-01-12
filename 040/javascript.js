@@ -26,7 +26,7 @@ function champernowneDigit(index) {
   // x = 'starting number from previous term' : 10 ** (term - 1)
   // y = index / (digits of this term)        : Math.ceil(index / term)
   // shift (remainder) means the digit in location number [0, 1, 2...]
-  let number = 10 ** (term - 1) + Math.ceil(index / term)
+  let number = 10 ** (term - 1) + Math.floor(index / term)
   let shift = index % term;
 
   let digit = number.toString()[shift];
@@ -44,4 +44,5 @@ function search() {
 }
 
 // tests
+// console.log(champernowneDigit(1000))
 console.log(search());
