@@ -5,8 +5,7 @@ def champernowne_digit(index):
     return index
   
   # returns the digit length of the given generation (series)
-  def generation(k):
-    return 9 * k * 10 ** (k - 1)
+  generation = lambda term: 9 * term * 10 ** (term - 1)
 
   # getting the series of given index
   k = 1
