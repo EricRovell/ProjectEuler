@@ -1,4 +1,4 @@
-// sieve of erathosphenes generator
+// sieve of Eratosthenes generator
 function* sieve(limit) {
   // creating an array where index means actual number
   // 0 and 1 - are not primes
