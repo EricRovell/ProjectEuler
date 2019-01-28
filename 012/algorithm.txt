@@ -1,0 +1,49 @@
+In order to search the number of divisors of the given integer effectively
+we need to use prime factorization.
+
+! Suppose, we already have a list of primes (we can use Eratothenes sieve).
+
+Any composite number can be decomposed into a product of smaller integers.
+If these integers are further restricted to primes numbers, the process is called
+'prime factorization':
+
+number = product of primes to some power
+number = prime1^a1 * prime2^a2 ...
+
+Let's have an example: number = 36
+
+This can be put into prime factors as:
+  36 = 2^2 * 3^2.
+
+Now, the factor:
+  2 can be chosen in 3 ways: 0 (none), 1 or 2 times.
+  3 can be chosen in 3 ways: 0 (none), 2 or 3 times.
+(If neither is chosen, we get the factor 2^0 * 3^0 = 1)
+
+All together, there will be 3 * 3 = 9 factors of 36. These are:
+  1, 2, 3, 4, 6, 9, 12, 18, 36
+
+The general rule for the number of factors is to increase the powers 
+of the factors by 1 and multiply these together.
+
+So:
+  a^n * b^m * c^p  will have (n + 1)(m + 1)(p + 1) factors.
+
+
+P.S
+And at last, to make the search faster, we can look for a number of divisors
+not in the triangle number itself, but in it's 'parts'.
+Any triangle number can be expressed as:
+
+  T(n) = n * (n + 1) / 2,
+    Multiple 1:    n    or   (n/2)
+    Multiple 2: (n + 1) or (n + 1)/2
+
+n and (n + 1) -> coprimes,
+thus the total number of divisors could be found:
+
+if 'n' is even:
+  D(T(n)) = D(n/2) * D(n + 1)
+
+if 'n' is odd:
+  D(T(n)) = D(n) * D((n + 1)/2)
