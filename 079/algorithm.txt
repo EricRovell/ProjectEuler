@@ -1,0 +1,16 @@
+1. Determine the digits in the passcode by making a list
+  of digits in the keys, without duplicates.
+
+2. Make a list of pairs of numbers from the order in the keys.
+  (1, 2, 3) -> (1, 2), (2, 3)
+
+3. Find the unique digit which never appears
+  at the beginning of any of the pairs.
+  ! This is the last digit in the passcode,
+  because nothing comes after it.
+
+4. Remove pairs which include the last digit in the second entry 
+  of the pair, and repeat step 3 to find the second-last digit and so on.
+
+5. Loop this process N times, where N is the length of the passcode
+  until you have constructed the whole passcode.
