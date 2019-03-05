@@ -20,11 +20,20 @@ The direct translation of the problem is to generate all Fibonacci numbers up to
 
 ---
 
+## Even-fibonacci sequence solution, recursive
 
-   
+Checking every fibonacci number takes a lot of computing power and might be unnecessary. Let's try to get rid of this excessive testing for parity in the sequence. After looking at sequence itself we might see:
 
+>$1, 1,$ $\color{red}2$ $, 3, 5,$ $\color{red}8$, 13, 21, $\color{red}34$ $, 55, 89,$ $\color{red}144...$
 
+that every 3rd member is even.  
 
+This reduces our sequence to:
+
+> $F_{even} = \{F_{k}: k = 3n, n \ni \N \}$
+
+With this information let's try to find recursive relation for even Fibonacci numbers:
+ 
 $$\begin{aligned}
 F_{n} &= F_{n-1} + F_{n-2}\\
 &= F_{n-2} + F_{n-3} + F_{n-2}\\
