@@ -187,9 +187,14 @@ Using this approach it is possible to build up an array to find the solution for
 Pseudocode may look like this:
 
 ```
-initialize a target value
-initialize an array with value + 1 elements
-let the first element of array to be 1.
+sum      <- initialize a sum value
+solution <- initialize an array with (value + 1) elements slots
+solution[0] <- 1
 
+for every coin-value:
+  for every change in [coin-value ; sum]:
+    solution[change] += solution[change - coin]
+
+solution[-1] -> the last element on array will be the answer
 
 ```
