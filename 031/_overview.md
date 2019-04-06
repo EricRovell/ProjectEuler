@@ -1,5 +1,13 @@
 # #031: Coin sums
 
+- [#031: Coin sums](#031-coin-sums)
+  - [Problem](#problem)
+  - [Brute force](#brute-force)
+  - [Dynamic programming approach](#dynamic-programming-approach)
+    - [Smaller example for understanding the approach](#smaller-example-for-understanding-the-approach)
+
+## Problem
+
 *In England the currency is made up of pound **£**, and pence **p**, and there are eight coins in general circulation:*
 
 > 1p, 2p, 5p, 10p, 20p, 50p, £1 (100p) and £2 (200p).
