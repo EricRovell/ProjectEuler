@@ -1,9 +1,8 @@
 def get_data():
   with open('022/data.txt') as names_book:
     names_book = names_book.read()
-    names_book = names_book.replace('"', r'')
     names_book = names_book.split(',')
-    names_book.sort()    
+    names_book.sort()
   return names_book
 
 letter_digit = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 
