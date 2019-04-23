@@ -8,7 +8,8 @@ def productsSet(n, m):
     return 0
   elif n < 0 or m < 0:
     return None
-   products = set()
+  
+  products = set()
 
   # for n = 1, 2, 3: (1, 9), (10, 99), (100, 999)
   for i in range(10 ** (n - 1), 10 ** n):
@@ -24,7 +25,7 @@ def palindromes(list, maximum = 0):
   for number in list:
     if str(number) == str(number)[::-1]:
       palindromeSet.add(number)
-   if maximum == 0:
+  if maximum == 0:
     return palindromeSet
   else:
     return max(palindromeSet)
