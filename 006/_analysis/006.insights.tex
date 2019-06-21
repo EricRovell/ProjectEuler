@@ -1,0 +1,261 @@
+\documentclass[14pt]{article}
+
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[top = 2cm, bottom = 2cm, left = 2.5cm, right = 2.5cm]{geometry}
+
+\DeclareUnicodeCharacter{2212}{-}
+
+\begin{document}
+  
+  \title{Project Euler \#006: Sum square difference}
+  \author{Eric Rovell}
+  \date{\today}
+  \maketitle
+
+  \tableofcontents
+
+  \section{Description}
+
+    The sum of the squares of the first ten natural numbers is:
+
+    $$1^2 + 2^2 + ... + 10^2 = 385$$
+    
+    The square of the sum of the first ten natural numbers is:
+    
+    $$(1 + 2 + ... + 10)^2 = 55^2 = 3025$$
+    
+    Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is $3025 − 385 = 2640$. Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+
+  \subsection{Brute force}
+
+    Considering such low bound the problem asks for, the brute force solution is not a bad option. Realization is straightforward.
+
+    We start with initializing three variables for storing:
+    
+    \begin{itemize}
+      \item limit value
+      \item sum of squres
+      \item square of sum
+    \end{itemize}
+        
+    After that, iterating over closed interval $[1, limit]$ with \textit{for} loop, loop-variable **i** is added to the square of sum and $\mathit{i ^ 2}$ to the sum of squres simultaneously.
+    
+    After the loop is finished, calculated difference between two variables is printed: $\mathit{sum ^ 2 - sum of squares}$.
+
+    \begin{verbatim}
+      limit <- 100
+      sum   <-   0    // sum of natural numbers
+      sumsq <-   0    // sum of squares
+
+      for number in [1, limit]:
+        sum += number
+        sumsq += number ^ 2
+
+      print sum ^ 2 - sumsq
+    \end{verbatim}
+
+    However, such an approach will definetely get in trouble when limit become very large.
+
+  \subsection{Arithmetic approach}
+    
+    Optimized solution to this problem makes it possible to get the answer directly without incrementing the sum values, making improvements in time and memory usage.
+
+    \subsubsection{Sum of the natural numbers}
+
+      Sum of natural numbers can be easily found using the arithmetic series formula:
+      
+      $$\sum_{i = 1}^{n} i = \frac{1 + n}{2} \times n, n \in \mathbb{N}$$
+      
+      To get the square of sum we can use this formula directly and raise the result to the power of 2.
+
+    \subsubsection{Sum of the cubes of the natural numbers}
+
+      Dealing with sum of squares is a bit trickier, but a possible task. 
+
+      The investigation for the functional relation between the natural number and the sum of all squares up to this number begins with mapping values for some arguments:
+
+      $$
+      \begin{array}{l|rrrrrrr}
+        \text{argument} & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+        \hline
+        \text{sum of squares} & 0 & 1 & 5 & 14 & 30 & 55 & 91
+      \end{array}
+      $$
+
+      Let's investigate how much increments the sum with each time we increment our argument (values of differential):
+      
+      $$
+      \begin{array}{l|rrrrrrr}
+        \text{sum of squares} & 0 & 1 & 5 & 14 & 30 & 55 & 91 \\
+        \hline
+        \varDelta_1 &  & +1 & +4 & +9 & +16 & +25 & +36 \\
+      \end{array}
+      $$
+
+      We have the function increment: $+1, +4, +9, +16, +25, +36$. Non-linear growth obviously. It means that the function we are searching for is not linear and may have quadratic form. To investigate further we get the incrementation of incrementation values (second derivative):
+
+      $$
+      \begin{array}{l|rrrrrrr}
+        \varDelta_1 &  & +1 & +4 & +9 & +16 & +25 & +36 \\
+        \hline
+        \varDelta_2 &  &  & +3 & +5 & +7 & +9 & +11 \\
+      \end{array}
+      $$
+
+      We have: +3, +5, +7, +9, +11. Still not linear. Function is not quadratic and may be the 3rd order polynomial. It will become clear if we will check the incrementation of the values above:
+
+      $$
+      \begin{array}{l|rrrrrrr}
+        \varDelta_2 &  &  & +3 & +5 & +7 & +9 & +11 \\
+        \hline
+        \varDelta_3 &  &  &  & +2 & +2 & +2 & +2 \\
+      \end{array}
+      $$
+
+      We have: +2, +2, +2, +2. Linear growth! It means the function we are searching is definetly the 3rd order polynomial after all and has the form:
+
+      $$ax^3 + bx^2 + cx + d = 0$$
+
+      Let's map all information we got to the table:
+
+      $$
+      \begin{array}{l|rrrrrrr}
+        \text{argument} & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+        \hline
+        \text{sum of squares} & 0 & 1 & 5 & 14 & 30 & 55 & 91 \\
+        \varDelta_1 &  & +1 & +4 & +9 & +16 & +25 & +36 \\
+        \varDelta_2 &  &  & +3 & +5 & +7 & +9 & +11 \\
+        \varDelta_3 &  &  &  & +2 & +2 & +2 & +2 \\
+      \end{array}
+      $$
+
+      Putting in zero argument to the function we get that $\mathit{d}$ member of polynomial is actually zero:
+
+      $$a * 0^3 + b * x^2 + c * x + d = 0 \Rightarrow d = 0$$
+
+      We have 3 unknown variables $(a, b, c)$, thus we use the next three arguments to build-up the system of equations:
+
+      $$
+      \left\{
+      \begin{array}{ll}
+      a + b + c &= 1 \\
+      8a + 4b + 2c &= 5 \\
+      27a + 9b + 3c &= 17
+      \end{array}
+      \right.
+      $$
+
+      We can rewrite this system to the matrix form:
+
+      $$ \left[
+      \begin{array}{ccc}
+        1&1&1\\
+        8&4&2\\
+        27&9&3
+      \end{array}
+      \right]
+      \left[
+        \begin{array}{ccc}
+        a\\
+        b\\
+        c
+      \end{array}
+      \right]
+      =
+      \left[
+        \begin{array}{ccc}
+        1\\
+        5\\
+        14
+      \end{array}
+      \right] $$
+
+      By solving this equation we have:
+
+      $$
+      \left[
+      \begin{array}{ccc}
+        a\\
+        b\\
+        c
+      \end{array}
+      \right]
+      =
+      \left[
+        \begin{array}{ccc}
+        1/3\\
+        1/2\\
+        1/6
+      \end{array}
+      \right] $$
+
+      The function we were searching for:
+
+      $$
+      \begin{aligned}
+      \sum_{n = 1}^{x}n^2 = f(x) = \frac{1}{3}x^3 + \frac{1}{2}x^2 + \frac{1}{6}x
+      \end{aligned}
+      $$
+
+      We can refactor it:
+
+      $$
+      \begin{aligned}
+        f(x) &= \frac{2x^3 + 3x^2 + x}{6} \\
+            &= \frac{x(2x^2 + 3x + 1)}{6} \\
+            &= \frac{x(2x + 1)(x + 1)}{6}
+      \end{aligned}
+      $$
+
+      Having the function under out belt we can write highly optimized solution. 
+
+      \begin{verbatim}
+        limit <- initializing the limit value
+
+        // calcultating the sum of natural numbers
+        sum <- (1 + limit) * limit / 2
+
+        // calcultating the sum of squares
+        sqsum <- limit * (2 * limit - 1) * (limit - 1) / 6
+
+        print sum ^ 2 - sqsum
+      \end{verbatim}
+      
+      This algorithm is limited only by the size of the integer types of your programming language (and computer
+      memory) support.
+
+  \subsection{Difference function}
+
+    The formulas we got in the previous step seems to be enough, but we can improve the solution a bit more. Using those two equations we can derive the direct formula to get the answer the problem asks for:
+
+    To get the difference, we have to subtract the sum of squares from sum of natural numbers raised to the power of two:
+
+    $$
+    \begin{aligned}
+      \varDelta(n) &= \Big(\frac{1 + n}{2}n\Big)^2 - \frac{n(2n + 1)(n + 1)}{6}\\
+        &= \frac{(1 + 2n + n^2)n^2}{4} - \frac{2n^3 + 3n^2 + n}{6} \\
+        &= \frac{n^4 + 2n^3 + n^2}{4} - \frac{2n^3 + 3n^2 + n}{6} \\
+        &= \frac{3n^4 + 6n^3 + 3n^2 - 4n^3 - 6n^2 - 2n}{12} \\
+        &= \frac{3n^4 + 2n^3 - 3n^2 - 2n}{12} \\
+        &= \frac{n(3n^3 + 2n^2 - 3n - 2)}{12} \\
+        &= \frac{n(n - 1)(3n^2 + 5n + 2)}{12} \\
+        &= \frac{n(n - 1) \times 3(x + 1)(x + 2/3)}{12} \\
+        &= \frac{n(n^2 - 1)(3x + 2)}{12}
+    \end{aligned}
+    $$
+
+    After all this work we have got the direct functional relation between the natural number and the difference value between the square of the sum of the natural numbers and the sum of squares up to this number:
+
+    $$\varDelta(n) = \frac{n(n^2 - 1)(3x + 2)}{12}, n \in \mathbb{N}$$
+
+    Pseudocode for this result is pretty straightforward:
+
+    \begin{verbatim}
+      limit <- initializing a limit variable
+      print(limit * (limit ^ 2 - 1) * (3 * limit + 2) / 12)
+    \end{verbatim}
+  
+\end{document}
+  

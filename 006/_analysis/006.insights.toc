@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Description}{1}% 
+\contentsline {subsection}{\numberline {1.1}Brute force}{1}% 
+\contentsline {subsection}{\numberline {1.2}Arithmetic approach}{2}% 
+\contentsline {subsubsection}{\numberline {1.2.1}Sum of the natural numbers}{2}% 
+\contentsline {subsubsection}{\numberline {1.2.2}Sum of the cubes of the natural numbers}{2}% 
+\contentsline {subsection}{\numberline {1.3}Difference function}{3}% 

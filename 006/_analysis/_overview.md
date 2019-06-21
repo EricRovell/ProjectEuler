@@ -5,7 +5,7 @@ Table of contents:
   - [Description:](#description)
   - [Brute force](#brute-force)
   - [Optimized solution](#optimized-solution)
-    - [Sum of natural numbers](#sum-of-natural-numbers)
+    - [Sum of the natural numbers](#sum-of-the-natural-numbers)
     - [Sum of squares](#sum-of-squares)
   - [The difference function](#the-difference-function)
 
@@ -59,7 +59,7 @@ However, such an approach will definetely get in trouble when limit become very 
 
 Optimized solution to this problem makes it possible to get the answer directly without incrementing the sum values, making improvements in time and memory usage.
 
-### Sum of natural numbers
+### Sum of the natural numbers
 
 Sum of natural numbers can be easily found using the *sum of the finite arithmetic progression* formula:
 $$

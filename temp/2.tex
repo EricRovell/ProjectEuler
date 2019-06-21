@@ -1,0 +1,16 @@
+\documentclass{article}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \draw[line width = 1mm] (0, 0) -- (0, 2) -- (2, 0) -- (0, 0);
+  \draw[line width = 0.5mm] (0, 0) circle (10ex);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+  \draw[step = 0.25cm, gray, thick]
+  (-1, -1) grid (10, 10);
+\end{tikzpicture}
+
+\end{document}
