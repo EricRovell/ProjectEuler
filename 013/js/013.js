@@ -1,8 +1,21 @@
-var fs = require('fs');
+// filesystem
+const fs = require('fs');
 
-let data = fs.readFileSync('013/data.txt', 'utf8');
-data = data.toString().split('\n');
-
-let sum = data.reduce((acc, string) => acc + parseInt(string, 10), 0);
-sum = sum.toString().slice(0, 11).replace('.', '');
-console.log(sum);
+fs.readFile("../013_data.txt", "utf8", (error, data) => {
+  if (error) throw error;
+  
+  // fileData -> string -> split by newline
+  const fileData = data
+    .toString()
+    .split("\n");
+  // find a sum by converting every string to BigInt
+  const total = fileData
+    .reduce((acc, number) => acc + BigInt(number), 0n);
+  // convert the sum to String and slice out first 10 characters
+  const first10digits = total
+    .toString()
+    .slice(0, 10);
+  
+  // answer
+  console.log(first10digits);
+});
