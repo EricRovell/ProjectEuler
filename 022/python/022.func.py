@@ -1,4 +1,4 @@
-_path = '022/data.txt'
+_path = '../022_data.txt'
 
 def get_data(path: str):
   ''' Getting data from file. '''
