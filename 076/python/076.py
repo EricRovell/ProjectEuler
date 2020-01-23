@@ -7,11 +7,10 @@ def summations(value: int):
       number of summations, int '''
 
   ways = [1] + [0 for _ in range(value)]
-  for number in range(1, value + 1):
+  for number in range(1, value):
     for addend in range(number, value + 1):
       ways[addend] += ways[addend - number]
   # the last element is the answer
   return ways[-1]
 
-# tests
-# print(summations(100))
+# print(summations(5))
