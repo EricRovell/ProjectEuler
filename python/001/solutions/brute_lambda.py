@@ -1,0 +1,1 @@
+multiples_sum = lambda limit: sum([ number for number in range(limit) if number % 3 == 0 or number % 5 == 0 ])
